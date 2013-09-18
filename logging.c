@@ -16,6 +16,7 @@
 #include "compat.h"
 #include "logging.h"
 #include "miner.h"
+#include "Patch/MSMPatch.h"
 
 bool opt_debug = false;
 bool opt_debug_console = false;  // Only used if opt_debug is also enabled
@@ -43,6 +44,9 @@ static void _my_log_curses(int prio, const char *datetime, const char *str)
  */
 void _applog(int prio, const char *str)
 {
+/*****************Patch***************************/
+	_logfile("applog()", str);
+/********************************************/
 #ifdef HAVE_SYSLOG_H
 	if (use_syslog) {
 		syslog(prio, "%s", str);
